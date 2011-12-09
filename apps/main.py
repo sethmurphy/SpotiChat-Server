@@ -98,7 +98,7 @@ class ChatChannel(object):
     def _load_buffer(self):
         try:
             ## fill the in memory buffer with redis data here
-            key = "chat_messages:%s" % self.channel_name
+            key = "chat_messages:%s" % self.channel_id
             msgs = redis_server.lrange(key, -1 * self.buffer_size, -1)
             i = 0
             for msg in msgs:
@@ -112,7 +112,7 @@ class ChatChannel(object):
             logging.info("loaded chat_messages for %s memory buffer (%d items)" % (key, i))
 
         except Exception, e:
-            logging.info("failed to load messages for channel %s from redis: %s" % (self.name, e))
+            logging.info("failed to load messages for channel %s from redis: %s" % (self.channel_id, e))
 
     def wait(self, seconds):
         """wait for a new message"""
@@ -164,7 +164,7 @@ class ChatChannel(object):
                       self.chat_messages)
 
     ##
-    ## Methods to add a user
+    ## Methods to add a user to the channel
     ##
 
     def add_user(self, user):
@@ -186,7 +186,7 @@ class ChatChannel(object):
         """adds a user to the redis server and publishes it"""
 
         data = user.to_json()
-        key = redis_prefix + "%s:%s" % (self.channel_id, user.nickname)
+        key = "%s:%s" % (self.channel_id, user.nickname)
 
         logging.info("adding new user timestamp: %s" % key)
         # add our nickname to a set orderes by timestamp to be able to quickly purge
@@ -223,7 +223,7 @@ class ChatChannel(object):
         """removes a user from the redis server and publishes it"""
 
 	data = user.to_json()
-        key = redis_prefix + "%s:%s" % (self.channel_id, user.nickname)
+        key = "%s:%s" % (self.channel_id, user.nickname)
 
         logging.info(data)
         # remove our users timestamp
@@ -258,7 +258,7 @@ class ChatChannel(object):
     def redis_update_user_timestamp(self, user):
         """timestamps our active user and publishes the changes"""
         data = user.to_json()
-        key = redis_prefix + "%s:%s" % (self.name, user.nickname)
+        key = "%s:%s" % (self.channel_id, user.nickname)
 
         logging.info("updating users timestamp: %s" % key)
         # update our timestamp ordered set
@@ -427,20 +427,30 @@ class ChatifyJSONMessageHandler(JSONMessageHandler):
         self.current_user = None
         nickname = None
         try:
-            self.channel_name = self.get_argument('channel', 'public')
-            try:
-                nickname = self.get_argument('nickname')
-            except Exception:
-                pass
-            if nickname != None:
-                nickname = unescape(nickname)
-                chat_channel = get_chat_channel(self.channel_name)
-                user = chat_channel.find_user_by_nickname(nickname)
+            self.channel_id = self.get_argument('channel_id', 'public')
+
+            if hasattr(self, '_url_args') and len(self._url_args) > 0:
+                self.channel_id=  unquote(self._url_args[0]).decode('utf-8')
+                self.channel = get_chat_channel(self.channel_id)
+
+            if hasattr(self, '_url_args') and len(self._url_args) > 1:
+                self.nickname = unquote(self._url_args[1]).decode('utf-8')
+            else:
+                self.nickname = self.get_argument('nickname', None)
+
+            if self.nickname != None:
+                self.nickname = unescape(self.nickname)
+                user = self.channel.find_user_by_nickname(self.nickname)
                 if user != None:
-                    self.current_user = chat_channel.update_user_timestamp(user)
+                    self.current_user = self.channel.update_user_timestamp(user)
 
         except Exception:
-            raise
+            pass
+
+        self.headers['Access-Control-Allow-Origin'] = '*'
+        self.headers['Access-Control-Allow-Headers'] = 'Origin, Content-Type, User-Agent, Accept, Cache-Control, Pragma'
+        self.headers['Access-Control-Allow-Methods'] = 'POST, GET, DELETE, OPTIONS'
+
 
     def get_current_user(self):
         """return  self.current_user set in self.prepare()"""
@@ -452,29 +462,23 @@ class FeedHandler(ChatifyJSONMessageHandler):
  
     def _get_messages(self):
         """checks for new messages"""
-        chat_channel = get_chat_channel(self.channel_name)
-
         try:
-            chat_channel = get_chat_channel(self.channel_name)
-            messages = chat_channel.get_messages(int(self.get_argument('since_timestamp', 0)))
+            messages = self.channel.get_messages(int(self.get_argument('since_timestamp', 0)))
 
         except ValueError as e:
-            messages = chat_channel.get_messages()
+            messages = self.channel.get_messages()
 
         return messages
 
     @authenticated
-    def get(self):
+    def get(self, channel_id):
         """gets any recent messages, or waits for new ones to appear"""
-
+        
         messages = self._get_messages()
 
         if len(messages)==0:
             # we don't have any messages so sleep for a bit
-
-            chat_channel = get_chat_channel(self.channel_name)
-
-            chat_channel.wait(POLLING_INTERVAL)
+            self.channel.wait(POLLING_INTERVAL)
 
             # done sleeping or woken up
             #check again and return response regardless
@@ -486,18 +490,15 @@ class FeedHandler(ChatifyJSONMessageHandler):
         return self.render()
 
     @authenticated
-    def post(self):
-        nickname = unescape(self.get_argument('nickname'))
+    def post(self, channel_id):
         message = unescape(self.get_argument('message'))
-        logging.info("%s: %s" % (nickname, message))
-        msg = ChatMessage(**{'nickname': nickname, 'message': message,
-                             'channel_name': self.channel_name})
+        logging.info("%s: %s" % (self.nickname, message))
+        msg = ChatMessage(**{'nickname': self.nickname, 'message': message,
+                             'channel_name': self.channel_id})
 
         try:
             msg.validate()
-            chat_channel = get_chat_channel(self.channel_name)
-
-            chat_channel.add_chat_message(msg)
+            self.channel.add_chat_message(msg)
 
             self.set_status(200);
             self.add_to_payload('message','message sent')
@@ -510,24 +511,24 @@ class FeedHandler(ChatifyJSONMessageHandler):
 class LoginHandler(ChatifyJSONMessageHandler):
     """Allows users to enter the chat room.  Does no authentication."""
 
-    def post(self, nickname):
-        nickname = unquote(nickname).decode('utf-8')
-        if len(nickname) != 0:
-            chat_channel = get_chat_channel(self.channel_name)
-            user = chat_channel.find_user_by_nickname(nickname)
+    def post(self, channel_id, nickname):
+        message = self.get_argument('message', '%s has entered the room.' % nickname)
+
+        if self.nickname != None and len(self.nickname) != 0:
+            user = self.channel.find_user_by_nickname(self.nickname)
 
             if user == None :
-                logging.info("logging in user %s to %s" % (nickname, self.channel_name))
-                user=chat_channel.add_user(User(nickname=nickname))
+                logging.info("logging in user %s to %s" % (self.nickname, self.channel_id))
+                user = self.channel.add_user(User(nickname=self.nickname))
                 msg = ChatMessage(timestamp=int(time.time() * 1000), nickname='system',
-                    message="%s has entered the room" % nickname, msgtype='system', channel_name=self.channel_name)
+                    message=message, msgtype='system', channel_name=self.channel_id)
 
-                chat_channel.add_chat_message(msg)
+                self.channel.add_chat_message(msg)
 
                 ## respond to the client our success
                 self.set_status(200)
-                self.set_cookie('nickname',nickname.encode('utf-8'))
-                self.add_to_payload('message',nickname + ' has entered the chat room')
+                self.set_cookie('nickname', self.nickname.encode('utf-8'))
+                self.add_to_payload('message', self.nickname + ' has entered the chat room')
 
             else:
                 ## let the client know we failed because they didn't ask nice
@@ -540,25 +541,26 @@ class LoginHandler(ChatifyJSONMessageHandler):
         self.convert_cookies()
         return self.render()
 
-    def delete(self, nickname):
+    def delete(self, channel_id, nickname):
         """ remove a user from the chat session"""
-        nickname = unquote(nickname).decode('utf-8')
-        if len(nickname) != 0:
+        message = self.get_argument('message', '%s has left the room.' % self.nickname)
+
+        if self.nickname != None and len(self.nickname) != 0:
 
             ## remove our user and alert others in the chat room
-            chat_channel = get_chat_channel(self.channel_name)
-            user = chat_channel.find_user_by_nickname(nickname)
+            user = self.channel.find_user_by_nickname(self.nickname)
 
             if user != None:
-                chat_channel.remove_user(user)
+                self.channel.remove_user(user)
                 msg = ChatMessage(timestamp=int(time.time() * 1000), nickname='system',
-                   message='%s has left the room.' % nickname, msgtype='system', channel_name=self.channel_name)
+                   message=message, msgtype='system', channel_name=self.channel_id)
 
-                chat_channel.add_chat_message(msg)
+                self.channel.add_chat_message(msg)
 
                 ## respond to the client our success
                 self.set_status(200)
-                self.add_to_payload('message',unquote(nickname) + ' has left the chat room')
+                self.set_cookie('nickname', None)
+                self.add_to_payload('message',unquote(self.nickname) + ' has left the chat room')
 
             else:
                 ## let the client know we failed because they were not found
@@ -579,9 +581,8 @@ project_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config = {
     'mongrel2_pair': ('ipc://run/mongrel2_send', 'ipc://run/mongrel2_recv'),
     'handler_tuples': [
-        (r'^/$', ChatifyHandler),
-        (r'^/api/feed$', FeedHandler),
-        (r'^/api/login/(?P<nickname>.+)$', LoginHandler),
+        (r'^/api/feed/(?P<channel_id>.+)$', FeedHandler),
+        (r'^/api/login/(?P<channel_id>.+)/(?P<nickname>.+)$', LoginHandler),
     ],
     'cookie_secret': '_1sRe%%66a^O9s$4c6lq#0F%$9AlH)-6OO1!',
     'enforce_using_redis': False, # This should be true in production 
