@@ -1,0 +1,321 @@
+11:44:47.065688 IP (tos 0x10, ttl 64, id 20664, offset 0, flags [DF], proto TCP (6), length 172)
+    chatify.sethmurphy.com.ssh > cpe-74-73-244-183.nyc.res.rr.com.54639: Flags [P.], cksum 0xb23d (incorrect -> 0xab3a), seq 2686174469:2686174601, ack 3564637576, win 3526, length 132
+E...P.@.@.7.B./.JI.....o.....x.P...=....h.1vg.7..8B..._\B..)Y.~;........J\...Ze...&..Y.CJ.........L...!o..o...g3....P$...:.<.Dd.nqB.......[|.\.@
+...R.bl&.K...].........b.
+11:44:47.066581 IP (tos 0x0, ttl 64, id 36744, offset 0, flags [DF], proto UDP (17), length 72)
+    chatify.sethmurphy.com.58108 > resolver2.newark.linode.com.domain: 14738+ PTR? 183.244.73.74.in-addr.arpa. (44)
+E..H..@.@.#.B./...E....5.4..9............183.244.73.74.in-addr.arpa.....
+11:44:47.066974 IP (tos 0x0, ttl 63, id 32518, offset 0, flags [none], proto UDP (17), length 176)
+    resolver2.newark.linode.com.domain > chatify.sethmurphy.com.58108: 14738 1/2/0 183.244.73.74.in-addr.arpa. PTR cpe-74-73-244-183.nyc.res.rr.com. (148)
+E.......?.t...E.B./..5......9............183.244.73.74.in-addr.arpa.............;..".cpe-74-73-244-183.nyc.res.rr.com.........;...
+dns-pri-01.rdc-nyc.R........;..
+dns-sec-01.q
+11:44:47.067331 IP (tos 0x0, ttl 64, id 36745, offset 0, flags [DF], proto UDP (17), length 71)
+    chatify.sethmurphy.com.48189 > resolver2.newark.linode.com.domain: 27379+ PTR? 5.69.192.207.in-addr.arpa. (43)
+E..G..@.@.#.B./...E..=.5.3..j............5.69.192.207.in-addr.arpa.....
+11:44:47.067750 IP (tos 0x0, ttl 63, id 32519, offset 0, flags [none], proto UDP (17), length 112)
+    resolver2.newark.linode.com.domain > chatify.sethmurphy.com.48189: 27379 1/0/0 5.69.192.207.in-addr.arpa. PTR resolver2.newark.linode.com. (84)
+E..p....?.u...E.B./..5.=.\.tj............5.69.192.207.in-addr.arpa.................	resolver2.newark.linode.com.
+11:44:47.089760 IP (tos 0x0, ttl 116, id 15854, offset 0, flags [DF], proto TCP (6), length 40)
+    cpe-74-73-244-183.nyc.res.rr.com.54639 > chatify.sethmurphy.com.ssh: Flags [.], cksum 0x6f59 (correct), ack 132, win 29104, length 0
+E..(=.@.t..CJI..B./..o...x.....P.q.oY..
+11:44:47.189700 IP (tos 0x0, ttl 51, id 0, offset 0, flags [DF], proto TCP (6), length 40)
+    222.82.236.149.58374 > chatify.sethmurphy.com.ssh: Flags [R], cksum 0x9b35 (correct), seq 2849458480, win 0, length 0
+E..(..@.3.
+J.R..B./.......I0....P....5..
+11:44:47.190071 IP (tos 0x0, ttl 64, id 36868, offset 0, flags [DF], proto UDP (17), length 73)
+    chatify.sethmurphy.com.33535 > resolver2.newark.linode.com.domain: 1967+ PTR? 149.236.82.222.in-addr.arpa. (45)
+E..I..@.@.#<B./...E....5.5...............149.236.82.222.in-addr.arpa.....
+11:44:47.190426 IP (tos 0x0, ttl 63, id 32520, offset 0, flags [none], proto UDP (17), length 162)
+    resolver2.newark.linode.com.domain > chatify.sethmurphy.com.33535: 1967 NXDomain 0/1/0 (134)
+E.......?.t...E.B./..5....-..............149.236.82.222.in-addr.arpa.............i..M.ns1.apnic.net.'read-txt-record-of-zone-first-dns-admin.=.-2%... .....	:.....
+11:44:47.191028 IP (tos 0x0, ttl 51, id 0, offset 0, flags [DF], proto TCP (6), length 40)
+    222.82.236.149.58374 > chatify.sethmurphy.com.ssh: Flags [R], cksum 0x9b35 (correct), seq 2849458480, win 0, length 0
+E..(..@.3.
+J.R..B./.......I0....P....5..
+11:44:48.861815 IP (tos 0x0, ttl 116, id 15857, offset 0, flags [DF], proto TCP (6), length 76)
+    cpe-74-73-244-183.nyc.res.rr.com.54150 > chatify.sethmurphy.com.ssh: Flags [P.], cksum 0x557f (correct), seq 3635022049:3635022085, ack 610364600, win 4097, length 36
+E..L=.@.t...JI..B./.........$al.P...U......1..QD..'/o..t{.\........V...`e.4'
+11:44:48.861873 IP (tos 0x10, ttl 64, id 37104, offset 0, flags [DF], proto TCP (6), length 40)
+    chatify.sethmurphy.com.ssh > cpe-74-73-244-183.nyc.res.rr.com.54150: Flags [.], cksum 0xb1b9 (incorrect -> 0xa8fd), ack 36, win 3794, length 0
+E..(..@.@..0B./.JI......$al...	.P.......
+11:44:49.767868 IP (tos 0x0, ttl 116, id 15858, offset 0, flags [DF], proto TCP (6), length 52)
+    cpe-74-73-244-183.nyc.res.rr.com.56865 > chatify.sethmurphy.com.www: Flags [S], cksum 0x9d5a (correct), seq 3800710944, win 8192, options [mss 1460,nop,wscale 2,nop,nop,sackOK], length 0
+E..4=.@.t..3JI..B./..!.P..? ...... ..Z..............
+11:44:49.767953 IP (tos 0x0, ttl 64, id 0, offset 0, flags [DF], proto TCP (6), length 52)
+    chatify.sethmurphy.com.www > cpe-74-73-244-183.nyc.res.rr.com.56865: Flags [S.], cksum 0xb1c5 (incorrect -> 0x8f64), seq 4244043747, ack 3800710945, win 14600, options [mss 1460,nop,nop,sackOK,nop,wscale 4], length 0
+E..4..@.@..%B./.JI...P.!......?!..9.................
+11:44:49.785973 IP (tos 0x0, ttl 116, id 15859, offset 0, flags [DF], proto TCP (6), length 40)
+    cpe-74-73-244-183.nyc.res.rr.com.56865 > chatify.sethmurphy.com.www: Flags [.], cksum 0xf81f (correct), ack 1, win 4380, length 0
+E..(=.@.t..>JI..B./..!.P..?!....P.......
+11:44:49.786254 IP (tos 0x0, ttl 116, id 15860, offset 0, flags [DF], proto TCP (6), length 452)
+    cpe-74-73-244-183.nyc.res.rr.com.56865 > chatify.sethmurphy.com.www: Flags [P.], cksum 0x167d (correct), seq 1:413, ack 1, win 4380, length 412
+E...=.@.t...JI..B./..!.P..?!....P....}..GET /oauth/twitter HTTP/1.1
+Host: spotichat.com
+Connection: keep-alive
+Cache-Control: max-age=0
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.121 Safari/535.2
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: en-US,en;q=0.8
+Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
+
+
+11:44:49.786288 IP (tos 0x0, ttl 64, id 28108, offset 0, flags [DF], proto TCP (6), length 40)
+    chatify.sethmurphy.com.www > cpe-74-73-244-183.nyc.res.rr.com.56865: Flags [.], cksum 0xb1b9 (incorrect -> 0x03cc), ack 413, win 980, length 0
+E..(m.@.@..eB./.JI...P.!......@.P.......
+11:44:49.787439 IP (tos 0x10, ttl 64, id 37105, offset 0, flags [DF], proto TCP (6), length 92)
+    chatify.sethmurphy.com.ssh > cpe-74-73-244-183.nyc.res.rr.com.54150: Flags [P.], cksum 0xb1ed (incorrect -> 0x0fba), seq 1:53, ack 36, win 3794, length 52
+E..\..@.@...B./.JI......$al...	.P...........k.O>W_.^~.0.@..._k.i..-.Cr...F.9..F.........7.w.
+11:44:49.787529 IP (tos 0x10, ttl 64, id 37106, offset 0, flags [DF], proto TCP (6), length 124)
+    chatify.sethmurphy.com.ssh > cpe-74-73-244-183.nyc.res.rr.com.54150: Flags [P.], cksum 0xb20d (incorrect -> 0x147e), seq 53:137, ack 36, win 3794, length 84
+E..|..@.@...B./.JI......$al...	.P..........5....@iC......>.....62=..x........5....-$3...K.....\..A.8x'U...+....[........-
+11:44:49.787634 IP (tos 0x10, ttl 64, id 37107, offset 0, flags [DF], proto TCP (6), length 140)
+    chatify.sethmurphy.com.ssh > cpe-74-73-244-183.nyc.res.rr.com.54150: Flags [P.], cksum 0xb21d (incorrect -> 0x3d28), seq 137:237, ack 36, win 3794, length 100
+E.....@.@...B./.JI......$am@..	.P.......2d...E....S..C.qd.9..\Z..X...V..!..~...Uajt...g.....z.1.^.8E.....9.|.7ji..8.yJ......../L...J...2.$.:
+11:44:49.788148 IP (tos 0x10, ttl 64, id 37108, offset 0, flags [DF], proto TCP (6), length 476)
+    chatify.sethmurphy.com.ssh > cpe-74-73-244-183.nyc.res.rr.com.54150: Flags [P.], cksum 0xb36d (incorrect -> 0x4634), seq 237:673, ack 36, win 3794, length 436
+E.....@.@..xB./.JI......$am...	.P....m...~.@Z...........Y......s..:...-.4.	../1&.ln.Tb.LP........#.v.y...Y......S.......6._|.....[..YA...+..+d..=#...R....  6..^d...9f...7...F..g......U.Z.}.K.....g...x.....c>..._#..0...,+...xK.r9.>...T~...r.h5.8.....i[.$...-!....t.m+.F.Y..wR..a.]Y...Ah?YX...].......2Uk_...G4z0......'Q+.y...v2..
+..JZN..R. ..Y.2.uW..*..Y.T.6.....,U...Z.Q8...p	....Z..4\.C.b,..o),.G..6. I....7..f.pZ..$.Ft[.....q.j..[..~jQ.A.5..rm.......6....u..zn.......hI.H.,.
+11:44:49.788195 IP (tos 0x10, ttl 64, id 37109, offset 0, flags [DF], proto TCP (6), length 396)
+    chatify.sethmurphy.com.ssh > cpe-74-73-244-183.nyc.res.rr.com.54150: Flags [P.], cksum 0xb31d (incorrect -> 0x7341), seq 673:1029, ack 36, win 3794, length 356
+E.....@.@...B./.JI......$aoX..	.P........t..C......H.9M%u.E.o6.9...=T.W"N......a#..r.d...t.D.5......P1...HX...q/.n...s...v....3N.U....z..7...Se)]..8.........'q....j....I.....&.....7c:L.w.
+.z.V.'gE..m.x...P.	....H...|.....p.Y'...g...I....4.......~........S.....:[a..V#..1.......I.5...r+_....Z=iI..:...O.......H."e6..h...%..)vaT.\p.8..U....:7C.M.N&....z.{......(&y,.}....$..l.....U:..j..w.cu..C..
+11:44:49.788922 IP (tos 0x10, ttl 64, id 37110, offset 0, flags [DF], proto TCP (6), length 188)
+    chatify.sethmurphy.com.ssh > cpe-74-73-244-183.nyc.res.rr.com.54150: Flags [P.], cksum 0xb24d (incorrect -> 0x3bfa), seq 1029:1177, ack 36, win 3794, length 148
+E.....@.@...B./.JI......$ap...	.P....M..7..!}f.T..p|.GN.2_..uq).m_.bUF..0X.P.....{.;;.y.D-.6I..7...........I..)..Ug..B......A.u.b./.(W?...Fa:|..:..[.[gC....M..:...~..W.(j......p.79>.\^.qk.
+11:44:49.788987 IP (tos 0x0, ttl 64, id 0, offset 0, flags [DF], proto UDP (17), length 61)
+    chatify.sethmurphy.com.52342 > resolver2.newark.linode.com.domain: 35556+ A? api.twitter.com. (33)
+E..=..@.@..LB./...E..v.5.)...............api.twitter.com.....
+11:44:49.789063 IP (tos 0x0, ttl 64, id 0, offset 0, flags [DF], proto UDP (17), length 61)
+    chatify.sethmurphy.com.45037 > resolver1.newark.linode.com.domain: 54514+ AAAA? api.twitter.com. (33)
+E..=..@.@..MB./...E....5.)...............api.twitter.com.....
+11:44:49.789270 IP (tos 0x0, ttl 64, id 39467, offset 0, flags [DF], proto UDP (17), length 71)
+    chatify.sethmurphy.com.60994 > resolver2.newark.linode.com.domain: 25269+ PTR? 4.69.192.207.in-addr.arpa. (43)
+E..G.+@.@...B./...E..B.5.3..b............4.69.192.207.in-addr.arpa.....
+11:44:49.789450 IP (tos 0x0, ttl 63, id 32521, offset 0, flags [none], proto UDP (17), length 211)
+    resolver2.newark.linode.com.domain > chatify.sethmurphy.com.52342: 35556 4/4/0 api.twitter.com. A 199.59.148.20, api.twitter.com. A 199.59.149.232, api.twitter.com. A 199.59.149.200, api.twitter.com. A 199.59.148.87 (183)
+E....	..?.t...E.B./..5.v...~.............api.twitter.com..................;...............;...............;...............;.W.............ns4.p34.dynect.net..............ns2.q.............ns1.q.............ns3.q
+11:44:49.789467 IP (tos 0x0, ttl 63, id 10192, offset 0, flags [none], proto UDP (17), length 133)
+    resolver1.newark.linode.com.domain > chatify.sethmurphy.com.45037: 54514 0/1/0 (105)
+E...'...?..5..E.B./..5...qo..............api.twitter.com................<.ns1.p26.dynect.net.
+zone-admin.dyndns..w..9.......X.	:....<
+11:44:49.789636 IP (tos 0x0, ttl 64, id 0, offset 0, flags [DF], proto UDP (17), length 80)
+    chatify.sethmurphy.com.49335 > resolver3.newark.linode.com.domain: 35331+ AAAA? api.twitter.com.members.linode.com. (52)
+E..P..@.@...B./.ak.....5.<Y[.............api.twitter.com.members.linode.com.....
+11:44:49.789668 IP (tos 0x0, ttl 63, id 32522, offset 0, flags [none], proto UDP (17), length 112)
+    resolver2.newark.linode.com.domain > chatify.sethmurphy.com.60994: 25269 1/0/0 4.69.192.207.in-addr.arpa. PTR resolver1.newark.linode.com. (84)
+E..p.
+..?.u...E.B./..5.B.\..b............4.69.192.207.in-addr.arpa.............)...	resolver1.newark.linode.com.
+11:44:49.789915 IP (tos 0x0, ttl 63, id 56442, offset 0, flags [none], proto UDP (17), length 80)
+    resolver3.newark.linode.com.domain > chatify.sethmurphy.com.49335: 35331 NXDomain* 0/0/0 (52)
+E..P.z..?.F.ak..B./..5...<@..............api.twitter.com.members.linode.com.....
+11:44:49.789936 IP (tos 0x0, ttl 64, id 39468, offset 0, flags [DF], proto UDP (17), length 71)
+    chatify.sethmurphy.com.35622 > resolver2.newark.linode.com.domain: 52059+ PTR? 4.133.107.97.in-addr.arpa. (43)
+E..G.,@.@...B./...E..&.5.3...[...........4.133.107.97.in-addr.arpa.....
+11:44:49.790133 IP (tos 0x0, ttl 64, id 166, offset 0, flags [DF], proto TCP (6), length 60)
+    chatify.sethmurphy.com.50783 > r-199-59-148-20.twttr.com.https: Flags [S], cksum 0xce1c (incorrect -> 0x6a77), seq 1598790282, win 14600, options [mss 1460,sackOK,TS val 2054724140 ecr 0,nop,wscale 4], length 0
+E..<..@.@.l(B./..;..._.._K........9............
+zx.,........
+11:44:49.810407 IP (tos 0x0, ttl 63, id 32523, offset 0, flags [none], proto UDP (17), length 202)
+    resolver2.newark.linode.com.domain > chatify.sethmurphy.com.35622: 52059 1/5/0 4.133.107.97.in-addr.arpa. PTR resolver3.newark.linode.com. (174)
+E.......?.t...E.B./..5.&..4?.[...........4.133.107.97.in-addr.arpa.............Q...	resolver3.newark.linode.com.........Q....ns5.H........Q....ns1.H........Q....ns2.H........Q....ns4.H........Q....ns3.H
+11:44:49.810810 IP (tos 0x0, ttl 64, id 39489, offset 0, flags [DF], proto UDP (17), length 72)
+    chatify.sethmurphy.com.40449 > resolver2.newark.linode.com.domain: 13959+ PTR? 20.148.59.199.in-addr.arpa. (44)
+E..H.A@.@...B./...E....5.4..6............20.148.59.199.in-addr.arpa.....
+11:44:49.813151 IP (tos 0x0, ttl 63, id 32524, offset 0, flags [none], proto UDP (17), length 197)
+    resolver2.newark.linode.com.domain > chatify.sethmurphy.com.40449: 13959 1/4/0 20.148.59.199.in-addr.arpa. PTR r-199-59-148-20.twttr.com. (169)
+E.......?.t...E.B./..5.....e6............20.148.59.199.in-addr.arpa..................r-199-59-148-20.twttr.com.........Q....ns4.p34.dynect.net.........Q....ns1.c........Q....ns2.c........Q....ns3.c
+11:44:49.818028 IP (tos 0x0, ttl 116, id 15861, offset 0, flags [DF], proto TCP (6), length 40)
+    cpe-74-73-244-183.nyc.res.rr.com.54150 > chatify.sethmurphy.com.ssh: Flags [.], cksum 0xa768 (correct), ack 137, win 4063, length 0
+E..(=.@.t..<JI..B./.......	.$am@P....h..
+11:44:49.818061 IP (tos 0x0, ttl 116, id 15862, offset 0, flags [DF], proto TCP (6), length 40)
+    cpe-74-73-244-183.nyc.res.rr.com.54150 > chatify.sethmurphy.com.ssh: Flags [.], cksum 0xa413 (correct), ack 673, win 4380, length 0
+E..(=.@.t..;JI..B./.......	.$aoXP.......
+11:44:49.818076 IP (tos 0x0, ttl 116, id 15863, offset 0, flags [DF], proto TCP (6), length 40)
+    cpe-74-73-244-183.nyc.res.rr.com.54150 > chatify.sethmurphy.com.ssh: Flags [.], cksum 0xa299 (correct), ack 1177, win 4254, length 0
+E..(=.@.t..:JI..B./.......	.$aqPP.......
+11:44:49.879336 IP (tos 0x0, ttl 46, id 0, offset 0, flags [DF], proto TCP (6), length 60)
+    r-199-59-148-20.twttr.com.https > chatify.sethmurphy.com.50783: Flags [S.], cksum 0xef45 (correct), seq 2673676603, ack 1598790283, win 5792, options [mss 1460,sackOK,TS val 1164420996 ecr 2054724140,nop,wscale 8], length 0
+E..<..@...~..;..B./...._.].;_K.......E.........
+Eg..zx.,....
+11:44:49.879398 IP (tos 0x0, ttl 64, id 167, offset 0, flags [DF], proto TCP (6), length 52)
+    chatify.sethmurphy.com.50783 > r-199-59-148-20.twttr.com.https: Flags [.], cksum 0xce14 (incorrect -> 0x30c9), ack 1, win 913, options [nop,nop,TS val 2054724229 ecr 1164420996], length 0
+E..4..@.@.l/B./..;..._.._K...].<...........
+zx..Eg..
+11:44:49.879861 IP (tos 0x0, ttl 64, id 168, offset 0, flags [DF], proto TCP (6), length 147)
+    chatify.sethmurphy.com.50783 > r-199-59-148-20.twttr.com.https: Flags [P.], cksum 0xce73 (incorrect -> 0xa848), seq 1:96, ack 1, win 913, options [nop,nop,TS val 2054724230 ecr 1164420996], length 95
+E.....@.@.k.B./..;..._.._K...].<.....s.....
+zx..Eg......Z...V..N......B..j.n.[iGc......nFc...y\..(.9.8.5.....
+.3.2./.........	..................#..
+11:44:49.970784 IP (tos 0x0, ttl 47, id 47506, offset 0, flags [DF], proto TCP (6), length 52)
+    r-199-59-148-20.twttr.com.https > chatify.sethmurphy.com.50783: Flags [.], cksum 0x32b7 (correct), ack 96, win 23, options [nop,nop,TS val 1164421296 ecr 2054724230], length 0
+E..4..@./..C.;..B./...._.].<_K......2......
+Eg..zx..
+11:44:49.970858 IP (tos 0x0, ttl 47, id 47507, offset 0, flags [DF], proto TCP (6), length 1500)
+    r-199-59-148-20.twttr.com.https > chatify.sethmurphy.com.50783: Flags [.], cksum 0x1020 (correct), seq 1:1449, ack 96, win 23, options [nop,nop,TS val 1164421296 ecr 2054724230], length 1448
+E.....@./....;..B./...._.].<_K....... .....
+Eg..zx......5...1..N...H r...{..}....v...4...kJy.w......	......#.................0...0..........V
+..>UW.j.&..+.>0.	*.H.......0..1.0	..U....US1.0...U.
+..VeriSign, Inc.1.0...U....VeriSign Trust Network1;09..U...2Terms of use at https://www.verisign.com/rpa (c)091/0-..U...&VeriSign Class 3 Secure Server CA - G20..100518000000Z.120517235959Z0..1.0	..U....US1.0...U...
+California1.0...U...San Francisco1.0...U.
+.Twitter, Inc.1.0...U....Twitter Platform1.0...U....api.twitter.com0.."0.	*.H............0..
+........P..f......jn|....K .o......n......."p.v.D...#.T..P..kk..%.....:..Z...Om|0&.<^..R..... .d.[./.!.@....+....3^.O...x.;n...X......O>.p...K..n.........sr......K.I...WD.\r
++.....{..|k4.x..w.......T....V.>{...`.Z.T.:.G.P.....Xp.
+[.{.L=.q.....o.k.. ~....p...u.........0...0	..U....0.0...U........0E..U...>0<0:.8.6.4http://SVRSecure-G2-crl.verisign.com/SVRSecureG2.crl0D..U. .=0;09..`.H...E....0*0(..+.........https://www.verisign.com/rpa0...U.%..0...+.........+.......0...U.#..0.........A..Je.H...W-}G0v..+........j0h0$..+.....0...http://ocsp.verisign.com0@..+.....0..4http://SVRSecure-G2-aia.verisign.com/SVRSecureG2.cer0n..+........b0`.^.\0Z0X0V.	image/gif0!0.0...+......Kk.(.....R8.).K..!..0&.$http://logo.verisign.com/vslogo1.gif0.	*.H..............!E.v1..O.L.X....j7b.1....G....X.k:	...+...-.I..M..9..Z.RWu.0....	..=...@..tlsW...Y.^.s..=.>8v.tl......-.......[c.. ....-.FwQ....?z.;> a.......R!.O+.SB>..p.qX,...A.9......U...M(.)....-.' ....
+11:44:49.970890 IP (tos 0x0, ttl 64, id 169, offset 0, flags [DF], proto TCP (6), length 52)
+    chatify.sethmurphy.com.50783 > r-199-59-148-20.twttr.com.https: Flags [.], cksum 0xce14 (incorrect -> 0x2885), ack 1449, win 1094, options [nop,nop,TS val 2054724321 ecr 1164421296], length 0
+E..4..@.@.l-B./..;..._.._K...].....F.......
+zx..Eg..
+11:44:49.971216 IP (tos 0x0, ttl 47, id 47508, offset 0, flags [DF], proto TCP (6), length 1500)
+    r-199-59-148-20.twttr.com.https > chatify.sethmurphy.com.50783: Flags [.], cksum 0x5cb1 (correct), seq 1449:2897, ack 96, win 23, options [nop,nop,TS val 1164421296 ecr 2054724230], length 1448
+E.....@./....;..B./...._.].._K......\......
+Eg..zx..B..K.-l.[...C
+.E.q..!74kz.	.kYLE..H%.,..#.R...v........H.y....~...00..,0..........nO....i..g....X.0.	*.H.......0..1.0	..U....US1.0...U.
+..VeriSign, Inc.1<0:..U...3Class 3 Public Primary Certification Authority - G21:08..U...1(c) 1998 VeriSign, Inc. - For authorized use only1.0...U....VeriSign Trust Network0..090325000000Z.190324235959Z0..1.0	..U....US1.0...U.
+..VeriSign, Inc.1.0...U....VeriSign Trust Network1;09..U...2Terms of use at https://www.verisign.com/rpa (c)091/0-..U...&VeriSign Class 3 Secure Server CA - G20.."0.	*.H............0..
+......V.W;7(.@c....t...j..qW/..4......7$...CE......J..>.N..IPE7@.t..QUa.`....../.!.E......G. (..h...\...Y..bV\MI.&..TQ:/J.....r...h<..9z........ab.....).q^b.C..1.q..N&.Q..di....}.{a...|.\..{._+F.......[......[...x.f...^...6...{.}.0z....Q+ .....N.g...+....T...)..........0...04..+........(0&0$..+.....0...http://ocsp.verisign.com0...U.......0.......0p..U. .i0g0e..`.H...E....0V0(..+.........https://www.verisign.com/cps0*..+.......0...https://www.verisign.com/rpa04..U...-0+0).'.%.#http://crl.verisign.com/pca3-g2.crl0...U...........0m..+........a0_.].[0Y0W0U.	image/gif0!0.0...+..............k...j.H.,{..0%.#http://logo.verisign.com/vslogo.gif0)..U..."0 ..0.1.0...U....Class3CA2048-1-520...U............A..Je.H...W-}G0....U.#...0........0..1.0	..U....US1.0...U.
+..VeriSign, Inc.1<0:..U...3Class 3 Public Primary Certification Authority - G21:08..U...1(c) 1998 VeriSign, Inc. - For authorized use
+11:44:49.971248 IP (tos 0x0, ttl 64, id 170, offset 0, flags [DF], proto TCP (6), length 52)
+    chatify.sethmurphy.com.50783 > r-199-59-148-20.twttr.com.https: Flags [.], cksum 0xce14 (incorrect -> 0x2228), ack 2897, win 1275, options [nop,nop,TS val 2054724321 ecr 1164421296], length 0
+E..4..@.@.l,B./..;..._.._K...].............
+zx..Eg..
+11:44:49.971264 IP (tos 0x0, ttl 47, id 47509, offset 0, flags [DF], proto TCP (6), length 264)
+    r-199-59-148-20.twttr.com.https > chatify.sethmurphy.com.50783: Flags [P.], cksum 0xf8c2 (correct), seq 2897:3109, ack 96, win 23, options [nop,nop,TS val 1164421296 ecr 2054724230], length 212
+E.....@./..l.;..B./...._.].._K.............
+Eg..zx.. only1.0...U....VeriSign Trust Network..}........yg...4.0.	*.H...........ct/=S./..&.f....A'........8V:...9. u..l-g.).!...cK..'c.....$....=..oT.......|..^b...	.B....-.:#`....n.....<^....5..#$.........._.........
+11:44:49.971276 IP (tos 0x0, ttl 64, id 171, offset 0, flags [DF], proto TCP (6), length 52)
+    chatify.sethmurphy.com.50783 > r-199-59-148-20.twttr.com.https: Flags [.], cksum 0xce14 (incorrect -> 0x209f), ack 3109, win 1456, options [nop,nop,TS val 2054724321 ecr 1164421296], length 0
+E..4..@.@.l+B./..;..._.._K...].`...........
+zx..Eg..
+11:44:49.973626 IP (tos 0x0, ttl 64, id 172, offset 0, flags [DF], proto TCP (6), length 366)
+    chatify.sethmurphy.com.50783 > r-199-59-148-20.twttr.com.https: Flags [P.], cksum 0xcf4e (incorrect -> 0x5507), seq 96:410, ack 3109, win 1456, options [nop,nop,TS val 2054724323 ecr 1164421296], length 314
+E..n..@.@.j.B./..;..._.._K...].`.....N.....
+zx..Eg...................1.....3 >.GX....%o..n%......(^.9tB..J.z.vyZ8.....*......A.......;..J......R.h<..V.+.{ ...L.2.CK.}......c...oC.,J..t...\.^6Q.P.e^...e.p.`o.....M(n.........Q.-./..e..71......L...w$h.
+....."-.T=.c..Xo...@..6(..)..EA........GH..r.{...a.wu.."..c...0..6<...........$
+V.....b....;....5..4.+..S$9.....>kW
+11:44:50.067309 IP (tos 0x0, ttl 47, id 47510, offset 0, flags [DF], proto TCP (6), length 274)
+    r-199-59-148-20.twttr.com.https > chatify.sethmurphy.com.50783: Flags [P.], cksum 0x5244 (correct), seq 3109:3331, ack 410, win 27, options [nop,nop,TS val 1164421393 ecr 2054724323], length 222
+E.....@./..a.;..B./...._.].`_K.$....RD.....
+Eg..zx..................nN.......J.r...1|.....sGP....{.?...q..B......t..x.Y....N'7..8zi.G......w^.o..0.abW...G....	Z...T.f,..\.k....f.+G.b.H*.]....F/q&4O....].#..s.P.......`6`..................$..E.....N]Q...B...{.s..)....../. ...
+11:44:50.067701 IP (tos 0x0, ttl 64, id 173, offset 0, flags [DF], proto TCP (6), length 552)
+    chatify.sethmurphy.com.50783 > r-199-59-148-20.twttr.com.https: Flags [P.], cksum 0xd008 (incorrect -> 0x7d28), seq 410:910, ack 3331, win 1637, options [nop,nop,TS val 2054724417 ecr 1164421393], length 500
+E..(..@.@.j5B./..;..._.._K.$.].>...e.......
+zx.AEg........:.......y....\l./....5..&z...4...d.i.kH".Ksu..u.."..b....y.|.)....o.T..o...K.nr....>..lva?..#w......>]Y.$....Q.*..#.....)+..,...A.WW5.{.du~...v..8..m.;_J..Q..[..:[....@.m'...E.......0....zYMe...Ik&v..{..V..
+........D.^..!Dn.(KV0e........
+?..y.Eg8..`.......\^$G.On.Q....Hd..L.Ge.r..w|.0..RA.6.".L.9U......>HQ.nq",...8.Yqyv...~.f.* ................./...=n...P...*....}....L[.w.....\?..d...7A..au...T?8.!..~Kg ..!..r]ybF&d ...\....._+.-]a,........R......3w.P...-u~*.0....&.O.....U.....c.8.#.>.(.(.
+11:44:50.129787 IP6 (hlim 255, next-header ICMPv6 (58) payload length: 32) fe80::f03c:91ff:fedf:d12d > fe80::1: [icmp6 sum ok] ICMP6, neighbor solicitation, length 32, who has fe80::1
+	  source link-address option (1), length 8 (1): f2:3c:91:df:d1:2d
+`.... :..........<.....-...........................................<...-
+11:44:50.130062 IP (tos 0x0, ttl 64, id 39808, offset 0, flags [DF], proto UDP (17), length 118)
+    chatify.sethmurphy.com.57964 > resolver2.newark.linode.com.domain: 30877+ PTR? 1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa. (90)
+E..v..@.@...B./...E..l.5.b..x............1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa.....
+11:44:50.130417 IP (tos 0x0, ttl 63, id 32525, offset 0, flags [none], proto UDP (17), length 177)
+    resolver2.newark.linode.com.domain > chatify.sethmurphy.com.57964: 30877 NXDomain* 0/1/0 (149)
+E......?.t...E.B./..5.l...Fx............1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa......F......*0./	localhost..nobody.invalid..............	:...*0
+11:44:50.130642 IP (tos 0x0, ttl 64, id 39808, offset 0, flags [DF], proto UDP (17), length 118)
+    chatify.sethmurphy.com.48721 > resolver2.newark.linode.com.domain: 15183+ PTR? d.2.1.d.f.d.e.f.f.f.1.9.c.3.0.f.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa. (90)
+E..v..@.@...B./...E..Q.5.b..;O...........d.2.1.d.f.d.e.f.f.f.1.9.c.3.0.f.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa.....
+11:44:50.131005 IP (tos 0x0, ttl 63, id 32526, offset 0, flags [none], proto UDP (17), length 177)
+    resolver2.newark.linode.com.domain > chatify.sethmurphy.com.48721: 15183 NXDomain* 0/1/0 (149)
+E.......?.t...E.B./..5.Q....;O...........d.2.1.d.f.d.e.f.f.f.1.9.c.3.0.f.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa......F......*0./	localhost..nobody.invalid..............	:...*0
+11:44:50.133098 IP6 (class 0xe0, hlim 255, next-header ICMPv6 (58) payload length: 24) fe80::1 > fe80::f03c:91ff:fedf:d12d: [icmp6 sum ok] ICMP6, neighbor advertisement, length 24, tgt is fe80::1, Flags [router, solicited]
+n.....:..........................<.....-..i.....................
+11:44:50.187445 IP (tos 0x0, ttl 47, id 47511, offset 0, flags [DF], proto TCP (6), length 1187)
+    r-199-59-148-20.twttr.com.https > chatify.sethmurphy.com.50783: Flags [P.], cksum 0x7e9c (correct), seq 3331:4466, ack 910, win 32, options [nop,nop,TS val 1164421513 ecr 2054724417], length 1135
+E.....@./....;..B./...._.].>_K..... ~......
+Eg..zx.A....j".B..Fe}..|..R..Z..X.L*?]c..	c...9.g.f...7..0&...L+.^xm.........{&Q..K!.^...]..G...... nA..4....I.^.L&..T..............YW..M..................d/..Jh
+i(....A..?q.._..WD.}..U.....'?....s.....
+...\..|..6%8-......6V....;..C.B.............T.mm.P.........t.h.E...+q u@..`...N....k.N..zta3.4.].~.....^.@.#.s.p...._.i..V7Ub...Y...C.w.*.XBty.A".8...Qp!~..Y.:..A.}j$.ECy#......N.yy....).@....X..P.o.6..b.V]\.....xY...&.R..N..r-_Js....[>. ......@.....+.x..h...4..HO.H"F....7[M....f,m.n..'r.....".T.Y.D...Y.7kn....e.Ei...^....L....+Q.-..b.......-P.9..kg.^yJT.Z.\.%m1.....o+*)..S.....`....bo....mU.u&.j2...^H...(P3a...).t.h~..t%$.....LaK.Y^asT.8...,1..>l..9..p.-....B-.I.4.I..!.\..*>..s..np..(c....~..#%..b...i[?..b...M4..|.....V.(.x.>c.....V.v...Ne..1~T5.......W.{"......>v..M."~.pN.y...kT.t...o.a_..Nj..TA].....Nh.C...x.$l)..w...m.@H..B..0i..C../?...}...).%....]hR.J...q.S ..t...W.E..V...~....	F.|.G.R&.Kf......Q.....c.V6.....sG!r.....[.7wM..M C.......4.p.EW.B....N.i..I.e...k..e.."......Y\.`...&_.Z..M...'-~.o..e.|......e.`c.U.b+..Zh......q...y..........-.......K....@...R.4b.@...w.qQ	."v..o;?.
+R)....ly.p....7.....:..p......"G....
+11:44:50.194345 IP (tos 0x10, ttl 64, id 37111, offset 0, flags [DF], proto TCP (6), length 172)
+    chatify.sethmurphy.com.ssh > cpe-74-73-244-183.nyc.res.rr.com.54150: Flags [P.], cksum 0xb23d (incorrect -> 0xd997), seq 1177:1309, ack 36, win 3794, length 132
+E.....@.@...B./.JI......$aqP..	.P....=.........!8R3..~.E.......7..}.;s<...... ..9..N........C..n....)5h .......W.p..G...ZA&......_9.S.mq.i...|?s..Jb.Gh0..E.G.....(..3..:6.	
+11:44:50.195331 IP (tos 0x10, ttl 64, id 37112, offset 0, flags [DF], proto TCP (6), length 140)
+    chatify.sethmurphy.com.ssh > cpe-74-73-244-183.nyc.res.rr.com.54150: Flags [P.], cksum 0xb21d (incorrect -> 0x019c), seq 1309:1409, ack 36, win 3794, length 100
+E.....@.@...B./.JI......$aq...	.P.......a.?.C.F-[r....J.0k..p.9.D..v......(K\&f.;.)...u.RF........"l.:.PAW.=.^.8...|.&...;M.]f.N.a!.&.h...;.
+11:44:50.195620 IP (tos 0x10, ttl 64, id 37113, offset 0, flags [DF], proto TCP (6), length 140)
+    chatify.sethmurphy.com.ssh > cpe-74-73-244-183.nyc.res.rr.com.54150: Flags [P.], cksum 0xb21d (incorrect -> 0x3e93), seq 1409:1509, ack 36, win 3794, length 100
+E.....@.@...B./.JI......$ar8..	.P..........5...$..F...Rf..y.8...M.J..........[w..E1.*...e...J...a.........q..,....A...`....q..W.k.J.{....3xC
+11:44:50.195967 IP (tos 0x0, ttl 64, id 28109, offset 0, flags [DF], proto TCP (6), length 483)
+    chatify.sethmurphy.com.www > cpe-74-73-244-183.nyc.res.rr.com.56865: Flags [P.], cksum 0xb374 (incorrect -> 0x474e), seq 1:444, ack 413, win 980, length 443
+E...m.@.@...B./.JI...P.!......@.P....t..HTTP/1.1 200 OK
+Content-Length: 121
+Access-Control-Allow-Methods: POST, GET, DELETE, OPTIONS
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Origin: sp://spotichat
+Access-Control-Allow-Headers: Origin, Content-Type, User-Agent, Accept, Cache-Control, Pragma, Set-Cookie
+Content-Type: application/json
+
+{"status_code":200,"status_msg":"OK","messages":"Failed to validate oauth signature and token","timestamp":1323794689787}
+11:44:50.212586 IP (tos 0x0, ttl 116, id 15864, offset 0, flags [DF], proto TCP (6), length 40)
+    cpe-74-73-244-183.nyc.res.rr.com.54150 > chatify.sethmurphy.com.ssh: Flags [.], cksum 0xa1a0 (correct), ack 1509, win 4171, length 0
+E..(=.@.t..9JI..B./.......	.$ar.P..K....
+11:44:50.226779 IP (tos 0x0, ttl 64, id 174, offset 0, flags [DF], proto TCP (6), length 52)
+    chatify.sethmurphy.com.50783 > r-199-59-148-20.twttr.com.https: Flags [.], cksum 0xce14 (incorrect -> 0x14e1), ack 4466, win 1818, options [nop,nop,TS val 2054724577 ecr 1164421513], length 0
+E..4..@.@.l(B./..;..._.._K...]"............
+zx..Eg..
+11:44:50.294238 IP (tos 0x0, ttl 116, id 15865, offset 0, flags [DF], proto TCP (6), length 364)
+    cpe-74-73-244-183.nyc.res.rr.com.56865 > chatify.sethmurphy.com.www: Flags [P.], cksum 0xe659 (correct), seq 413:737, ack 444, win 4269, length 324
+E..l=.@.t...JI..B./..!.P..@.....P....Y..GET /favicon.ico HTTP/1.1
+Host: spotichat.com
+Connection: keep-alive
+Accept: */*
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.121 Safari/535.2
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: en-US,en;q=0.8
+Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
+
+
+11:44:50.294315 IP (tos 0x0, ttl 64, id 28110, offset 0, flags [DF], proto TCP (6), length 40)
+    chatify.sethmurphy.com.www > cpe-74-73-244-183.nyc.res.rr.com.56865: Flags [.], cksum 0xb1b9 (incorrect -> 0x008a), ack 737, win 1047, length 0
+E..(m.@.@..cB./.JI...P.!......B.P.......
+11:44:50.294515 IP (tos 0x0, ttl 64, id 28111, offset 0, flags [DF], proto TCP (6), length 163)
+    chatify.sethmurphy.com.www > cpe-74-73-244-183.nyc.res.rr.com.56865: Flags [P.], cksum 0xb234 (incorrect -> 0xafad), seq 444:567, ack 737, win 1047, length 123
+E...m.@.@...B./.JI...P.!......B.P....4..HTTP/1.1 404 Not Found
+Content-Type: text/plain
+Connection: close
+Content-Length: 9
+Server: Mongrel2/1.7.5
+
+Not Found
+11:44:50.305915 IP (tos 0x0, ttl 116, id 15866, offset 0, flags [DF], proto TCP (6), length 40)
+    cpe-74-73-244-183.nyc.res.rr.com.56865 > chatify.sethmurphy.com.www: Flags [F.], cksum 0xf396 (correct), seq 737, ack 567, win 4238, length 0
+E..(=.@.t..7JI..B./..!.P..B.....P.......
+11:44:50.306074 IP (tos 0x0, ttl 64, id 28112, offset 0, flags [DF], proto TCP (6), length 40)
+    chatify.sethmurphy.com.www > cpe-74-73-244-183.nyc.res.rr.com.56865: Flags [F.], cksum 0xb1b9 (incorrect -> 0x000d), seq 567, ack 738, win 1047, length 0
+E..(m.@.@..aB./.JI...P.!......B.P.......
+11:44:50.317875 IP (tos 0x0, ttl 116, id 15867, offset 0, flags [DF], proto TCP (6), length 40)
+    cpe-74-73-244-183.nyc.res.rr.com.56865 > chatify.sethmurphy.com.www: Flags [.], cksum 0xf395 (correct), ack 568, win 4238, length 0
+E..(=.@.t..6JI..B./..!.P..B.....P.......
+11:44:50.480819 IP6 (class 0xe0, hlim 255, next-header ICMPv6 (58) payload length: 32) fe80::8a43:e1ff:fea4:4ff > 2600:3c03::f03c:91ff:fedf:d12d: [icmp6 sum ok] ICMP6, neighbor solicitation, length 32, who has 2600:3c03::f03c:91ff:fedf:d12d
+	  source link-address option (1), length 8 (1): 88:43:e1:a4:04:ff
+n.... :..........C......&.<......<.....-..1.....&.<......<.....-...C....
+11:44:50.480888 IP6 (hlim 255, next-header ICMPv6 (58) payload length: 24) 2600:3c03::f03c:91ff:fedf:d12d > fe80::8a43:e1ff:fea4:4ff: [icmp6 sum ok] ICMP6, neighbor advertisement, length 24, tgt is 2600:3c03::f03c:91ff:fedf:d12d, Flags [solicited]
+`.....:.&.<......<.....-.........C........`.@...&.<......<.....-
+11:44:50.481186 IP (tos 0x0, ttl 64, id 40159, offset 0, flags [DF], proto UDP (17), length 118)
+    chatify.sethmurphy.com.44779 > resolver2.newark.linode.com.domain: 56616+ PTR? d.2.1.d.f.d.e.f.f.f.1.9.c.3.0.f.0.0.0.0.0.0.0.0.3.0.c.3.0.0.6.2.ip6.arpa. (90)
+E..v..@.@..4B./...E....5.b...(...........d.2.1.d.f.d.e.f.f.f.1.9.c.3.0.f.0.0.0.0.0.0.0.0.3.0.c.3.0.0.6.2.ip6.arpa.....
+11:44:50.928948 IP (tos 0x0, ttl 63, id 32527, offset 0, flags [none], proto UDP (17), length 172)
+    resolver2.newark.linode.com.domain > chatify.sethmurphy.com.44779: 56616 NXDomain 0/1/0 (144)
+E.......?.t...E.B./..5....0..(...........d.2.1.d.f.d.e.f.f.f.1.9.c.3.0.f.0.0.0.0.0.0.0.0.3.0.c.3.0.0.6.2.ip6.arpa......<......Q..*.ns1.linode.com..dns.jw.Fi..8@..8@..u...Q.
+11:44:50.929155 IP (tos 0x0, ttl 64, id 40607, offset 0, flags [DF], proto UDP (17), length 118)
+    chatify.sethmurphy.com.48795 > resolver2.newark.linode.com.domain: 27079+ PTR? f.f.4.0.4.a.e.f.f.f.1.e.3.4.a.8.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa. (90)
+E..v..@.@..tB./...E....5.b..i............f.f.4.0.4.a.e.f.f.f.1.e.3.4.a.8.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa.....
+11:44:50.929472 IP (tos 0x0, ttl 63, id 32528, offset 0, flags [none], proto UDP (17), length 177)
+    resolver2.newark.linode.com.domain > chatify.sethmurphy.com.48795: 27079 NXDomain* 0/1/0 (149)
+E.......?.t...E.B./..5......i............f.f.4.0.4.a.e.f.f.f.1.e.3.4.a.8.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa......F......*0./	localhost..nobody.invalid..............	:...*0
+11:44:52.559670 IP (tos 0x10, ttl 64, id 37114, offset 0, flags [DF], proto TCP (6), length 188)
+    chatify.sethmurphy.com.ssh > cpe-74-73-244-183.nyc.res.rr.com.54150: Flags [P.], cksum 0xb24d (incorrect -> 0x7c7f), seq 1509:1657, ack 36, win 3794, length 148
+E.....@.@...B./.JI......$ar...	.P....M........+.Q/Wi....'..D..Rh....>..A.R..n	....sBO<.....X....8..* .w.J..a....[...	.....b..g..4..0%.wE.K....l.=b......w.'.:.O...M 	...l....$Y...drt...m[.
+11:44:52.560106 IP (tos 0x10, ttl 64, id 37115, offset 0, flags [DF], proto TCP (6), length 124)
+    chatify.sethmurphy.com.ssh > cpe-74-73-244-183.nyc.res.rr.com.54150: Flags [P.], cksum 0xb20d (incorrect -> 0x31e8), seq 1657:1741, ack 36, win 3794, length 84
+E..|..@.@...B./.JI......$as0..	.P.........O..q..^^{.R.,q.+....Y.%k@..P.....*.~.....}.o......}gE	......<.......G2^	...!.....
+11:44:52.578237 IP (tos 0x0, ttl 116, id 15868, offset 0, flags [DF], proto TCP (6), length 40)
+    cpe-74-73-244-183.nyc.res.rr.com.54150 > chatify.sethmurphy.com.ssh: Flags [.], cksum 0xa0f2 (correct), ack 1741, win 4113, length 0
+E..(=.@.t..5JI..B./.......	.$as.P.......
+11:44:53.290551 IP (tos 0x0, ttl 116, id 15870, offset 0, flags [DF], proto TCP (6), length 92)
+    cpe-74-73-244-183.nyc.res.rr.com.54639 > chatify.sethmurphy.com.ssh: Flags [P.], cksum 0xdb10 (correct), seq 1:53, ack 132, win 29104, length 52
+E..\=.@.t...JI..B./..o...x.....P.q.......9
+.zY.j.Y/h.).3^m....$3.$3.C.Q.vw1>s9...i.........
+

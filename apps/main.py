@@ -7,11 +7,24 @@ from dictshield.document import Document
 from dictshield.fields import EmbeddedDocument, ShieldException
 from gevent import Greenlet
 from gevent.event import Event
-from urllib import unquote
+from urllib import unquote, quote
+import sys
+import urllib2
 import functools
 import logging
 import os
 import time
+import md5
+import base64
+import hmac
+import hashlib
+import httplib
+import random
+import requests
+import json
+
+from config import TWITTER
+from config import FACEBOOK
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -472,6 +485,9 @@ class User(Document):
     timestamp = fields.IntField(required=True)
     username = fields.StringField(required=True, max_length=40)
     nickname = fields.StringField(required=True, max_length=40)
+    oauth_provider = fields.StringField(max_length=40)
+    oauth_id = fields.StringField(required=True, max_length=40)
+    oauth_data = fields.StringField(required=True, max_length=2048)
 
     def __init__(self, *args, **kwargs):
         super(User, self).__init__(*args, **kwargs)
@@ -559,7 +575,232 @@ class ChatifyJSONMessageHandler(JSONMessageHandler):
         """return  self.current_user set in self.prepare()"""
         return self.current_user
 
+class ChatifyOAuthHandler(JSONMessageHandler):
+    """our JSON message handlers base class"""
+    def prepare(self):
+        """get our user from the request"""
+        self.username = None
 
+        try:
+            if hasattr(self, '_url_args') and 'username' in self._url_args:
+                self.username =  unquote(self._url_args['username']).decode('utf-8')
+                if not self.username is None:
+                    logging.info("username from url_args: %s " % (self.username))
+
+            if self.username is None:
+                self.username = self.get_cookie('username', None, self.application.cookie_secret)
+                if not self.username is None:
+                    logging.info("username from cookie: %s " % (self.username))
+                else:
+                    self.username = self.get_argument('username', None)
+                    if not self.username is None:
+                        logging.info("username from query string: %s " % (self.username))
+                    else:
+                        logging.info("No username!")
+                        
+        except Exception:
+            raise
+
+        if self.username is None or len(self.username) == 0:
+            self.set_status(403, "username required")
+
+
+class TwitterOAuthHandler(ChatifyOAuthHandler):
+    """Handles twitter ouath authentication"""
+    def _signature_base_string(self, http_method, base_uri, query_params, delimiter = "%26"):
+        """Creates the base string ro an authorized twitter request"""
+        query_string = ''
+        for key, value in query_params:
+            if query_string != '':
+                query_string = query_string + delimiter
+            if value != '' and key != '':
+                query_string = query_string + quote( key , '') + "%3D" + quote( value, '' )
+
+        return http_method + "&" + quote(  base_uri, '' ) + "&" + query_string
+
+    def _sign(self, secret_key, base_string ):
+        """Creates a HMAC-SHA1 signature"""
+        digest = hmac.new(secret_key, base_string, hashlib.sha1).digest()
+        return base64.encodestring(digest).rstrip()
+
+    def _authorization_header(self, query_params):
+        authorization_header = 'OAuth'
+        
+        for key, value in query_params:
+            #print key
+            #print value
+            if value != '':
+                authorization_header = authorization_header + ' ' + key  + '="' + quote( value, '' ) + '",'
+        authorization_header = authorization_header.rstrip(',')
+        
+        return authorization_header
+        
+    def _generate_nonce(self):
+        random_number = ''.join(str(random.randint(0, 9)) for i in range(40))
+        m = md5.new(str(time.time()) + str(random_number))
+        return m.hexdigest()
+
+  
+    def get(self):
+        url = TWITTER['REQUEST_TOKEN_URL']
+        time_stamp = str(int(time.mktime(time.gmtime())))
+        #time_stamp = str( int( time.time() ) )
+        nonce = self._generate_nonce()
+        oauth_token = '';
+        oauth_secret = '';
+        oauth_callback = TWITTER['CALLBACK_URL'];
+        
+        #oauth_token = '266225623-HBjdxl2hgznbDbiAznVM4EySWM1WTUDGMxotiPcQ';
+        #oauth_secret = 'oW7oJn7SMe4PSy55lWy7v2taySVAcswNwfkfH3nLOQ';
+        #oauth_callback = ''
+        #nonce = 'a95d682aa2acc023642314b1f2cf75a4'
+        #time_stamp = '1323788861'
+        
+        query_params = [
+            ('oauth_callback', oauth_callback),
+            ('oauth_consumer_key', TWITTER['CONSUMER_KEY']),
+            ('oauth_nonce', nonce),
+            ('oauth_signature_method', 'HMAC-SHA1'),
+            ('oauth_timestamp', time_stamp),
+            ('oauth_token', oauth_token),
+            ('oauth_version', '1.0')
+        ]
+        signature_base_string = self._signature_base_string('POST', url, query_params)
+        signature_key = TWITTER['CONSUMER_SECRET'] + "&" + oauth_secret;
+        signature = self._sign(signature_key, signature_base_string)
+        
+        print signature_key + "\n\n"
+        print signature_base_string + "\n\n"
+        print signature + "\n\n"
+
+        query_params = [ 
+            ('oauth_nonce', nonce),
+            ('oauth_callback', oauth_callback),
+            ('oauth_signature_method', 'HMAC-SHA1'),
+            ('oauth_token', oauth_token),
+            ('oauth_timestamp', time_stamp),
+            ('oauth_consumer_key', TWITTER['CONSUMER_KEY']),
+            ('oauth_signature', signature),
+            ('oauth_version', '1.0')
+        ]
+
+
+        #httplib.HTTPConnection.debuglevel = 1
+        #opener = urllib2.build_opener(urllib2.HTTPHandler(debuglevel=1))
+        #urllib2.install_opener(opener)
+
+        authorization_header = self._authorization_header(query_params)
+        print authorization_header + "\n\n"
+
+        #req = urllib2.Request(url, {},)
+        #req.add_header('Authorization', authorization_header);
+        
+        the_page = "error"
+
+        try:
+            #response = urllib2.urlopen(req)
+            #response = opener.open(req)
+            #the_page = response.read()
+            response = requests.post(url, {}, **{'headers': { 'Authorization': authorization_header } } )
+            the_page = response.content
+            #print response.history
+            #print response.headers
+        except Exception:
+            raise
+        #print req.headers
+        print the_page + "\n\n"
+
+
+        self.set_status(200)
+
+        self.add_to_payload('messages', the_page)
+        return self.render()
+
+
+class FacebookOAuthRedirectorHandler(ChatifyOAuthHandler):
+    """Handles Facebook oauth authentication"""
+
+    def get(self, *args, **kwargs):
+
+        self.set_cookie('username', "9cd92be2ed90a04e8d1f178512b3d24331944617", self.application.cookie_secret, domain="spotichat.com")
+
+        # start the login process
+        url = "%s?client_id=%s&scope=%s&redirect_uri=%s&display=popup" % (FACEBOOK['REQUEST_URI'], FACEBOOK['APP_ID'], FACEBOOK['SCOPE'], FACEBOOK['REDIRECT_URI'] + "?username=" + self.username)
+        logging.debug( "facebook url %s" % url );
+        # send user to facebook login
+        return self.redirect(url)
+
+
+class FacebookOAuthCallbackHandler(ChatifyOAuthHandler):
+    """Handles Facebook oauth authentication"""
+
+    def _parse_content(self, content):
+        """Parses a key value pair or JSON string into a dict"""
+        kv_dict = {}
+        if content[0] == '{':
+            # assume JSON
+            kv_dict = json.loads(content)
+    
+        else:
+            kv_pairs = content.split('&')
+            for kv_pair in kv_pairs:
+                kv = kv_pair.split('=')
+                if len(kv) == 2:
+                    kv_dict[kv[0]]=kv[1] 
+
+        return kv_dict  
+
+    def get(self):
+        code = self.get_argument('code', '')
+        # we came from a callback and have our code    
+        logging.debug( "facebook callback" );
+        url = FACEBOOK['ACCESS_TOKEN_REQUEST_URI']
+        fields = { 
+            'client_id': FACEBOOK['APP_ID'],
+            'redirect_uri': FACEBOOK['REDIRECT_URI'] + "?username=" + self.username,
+            'client_secret': FACEBOOK['APP_SECRET'],
+            'code': code
+        }
+        
+        response = requests.post(url, fields)
+        access_token_info = self._parse_content(response.content)
+
+        # if succesfull in getting token, get some about me info
+        user = find_user_by_username(self.username)
+
+        if 'access_token' in access_token_info:
+            logging.debug( "access_token_info %s" % access_token_info );
+            # get a little more data about the user (me query)
+            url =  "%s?access_token=%s" % (FACEBOOK['ME_REQUEST_URI'], access_token_info['access_token'])
+            response = requests.get(url)
+            me_info = self._parse_content(response.content)
+            logging.debug( "me_info %s" % me_info );
+            access_token_info.update(me_info)
+            oauth_data = access_token_info
+            logging.debug( "oauth_info %s" % access_token_info );
+            # we should store this data now
+            if user == None:
+                user = User(username=self.username, nickname=oauth_data['username'], oauth_id=oauth_data['id'], oauth_provider='facebook', oauth_data=json.dumps(oauth_data))
+            else:
+                user.nickname = oauth_data['username']
+                user.oauth_id = oauth_data['id']
+                user.oauth_provider = 'facebook'
+                user.oauth_data = json.dumps(oauth_data)
+            
+            # adding an existing key just replaces it
+            add_user(user)
+
+            return self.redirect("/oauth/facebook/loggedin")
+        else:
+            self.set_status(403)
+            self.add_to_payload('messages', "Not Authenticated")
+
+        return self.render()
+
+
+
+
+        
 class FeedHandler(ChatifyJSONMessageHandler):
     """Handles poll requests from user; sends out queued messages."""
  
@@ -596,7 +837,7 @@ class FeedHandler(ChatifyJSONMessageHandler):
     def post(self, channel_id):
         message = unescape(self.get_argument('message'))
         logging.info("%s: %s" % (self.username, message))
-        msg = ChatMessage(**{'nickname': self.current_user.username, 'username': self.current_user.username, 'message': message,
+        msg = ChatMessage(**{'nickname': self.current_user.nickname, 'username': self.current_user.username, 'message': message,
                              'channel_name': self.channel_id})
 
         try:
@@ -613,23 +854,25 @@ class FeedHandler(ChatifyJSONMessageHandler):
 
 class ChannelLoginHandler(ChatifyJSONMessageHandler):
     """Allows users to enter the chat room.  Does no authentication."""
+
+    @authenticated
     def post(self, channel_id, username):
         message = self.get_argument('message', '%s has entered the room.' % username)
         username = unquote(username).decode('utf-8')
-        
+        nickname = self.current_user.nickname
         if username != None and len(username) != 0:
 
             if username == self.username :
                 logging.info("channel logging in user %s to %s" % (username, channel_id))
-                user = self.channel.add_user(User(username=self.username, nickname=self.username))
-                msg = ChatMessage(timestamp=int(time.time() * 1000), username='system',
+                user = self.channel.add_user(User(username=self.username, nickname=nickname))
+                msg = ChatMessage(timestamp=int(time.time() * 1000), username='system', nickname='system',
                     message=message, msgtype='system', channel_name=self.channel_id)
 
                 self.channel.add_chat_message(msg)
 
                 ## respond to the client our success
                 self.set_status(200)
-                self.add_to_payload('message', self.username + ' has entered the chat room')
+                self.add_to_payload('message', nickname + ' has entered the chat room')
 
             else:
                 ## let the client know we failed because they didn't ask nice
@@ -643,7 +886,6 @@ class ChannelLoginHandler(ChatifyJSONMessageHandler):
     @authenticated
     def delete(self, channel_id, username):
         """ remove a user from the chat session"""
-        message = self.get_argument('message', '%s has left the room.' % self.username)
         username = unquote(username).decode('utf-8')
 
         if self.username != None and len(self.username) != 0 and self.username == username:
@@ -652,6 +894,7 @@ class ChannelLoginHandler(ChatifyJSONMessageHandler):
             user = self.channel.find_user_by_username(self.username)
 
             if user != None:
+                message = self.get_argument('message', '%s has left the room.' % user.nickname)
                 self.channel.remove_user(user)
                 msg = ChatMessage(timestamp=int(time.time() * 1000), username='system', nickname='system',
                    message=message, msgtype='system', channel_name=self.channel_id)
@@ -660,7 +903,7 @@ class ChannelLoginHandler(ChatifyJSONMessageHandler):
 
                 ## respond to the client our success
                 self.set_status(200)
-                self.add_to_payload('message',unquote(self.username) + ' has left the chat room')
+                self.add_to_payload('message',unquote(user.nickname) + ' has left the chat room')
 
             else:
                 ## let the client know we failed because they were not found
@@ -678,19 +921,22 @@ class LoginHandler(ChatifyJSONMessageHandler):
         # right now a nickname and username are the same, however that will change
         if username != None and len(username) != 0:
             user = find_user_by_username(username)
-            nickname = self.username
+            nickname = username
             if user == None :
                 logging.info("adding user %s." % (username))
                 user = add_user(User(username=username, nickname=nickname))
             else:
+                nickname = user.nickname
                 logging.info("logging in user %s." % (username))
                 
             ## respond to the client our success
             self.set_status(200)
-            self.set_cookie('username', username.encode('utf-8'), self.application.cookie_secret, domain="*.spotichat.com")
+            self.set_cookie('username', username.encode('utf-8'), self.application.cookie_secret, domain="spotichat.com")
+            self.set_cookie('nickname', nickname, domain="spotichat.com")
 
-            self.add_to_payload('message', username + ' has entered the chat room')
+            self.add_to_payload('message', nickname + ' has entered the chat room')
             self.add_to_payload('username', cookie_encode(username.encode('utf-8'), self.application.cookie_secret))
+            self.add_to_payload('nickname', nickname)
 
         else:
             ## let the client know we failed because they didn't ask nice
@@ -701,7 +947,6 @@ class LoginHandler(ChatifyJSONMessageHandler):
     @authenticated
     def delete(self, channel_id, username):
         """ remove a user from the chat session"""
-        message = self.get_argument('message', '%s has left the room.' % self.username)
 
         if self.username != None and len(self.username) != 0:
 
@@ -709,13 +954,14 @@ class LoginHandler(ChatifyJSONMessageHandler):
             user = self.channel.find_user_by_username(self.username)
 
             if user != None:
+                message = self.get_argument('message', '%s has left the room.' % self.nickname)
                 #remove_user(user)
 
                 ## respond to the client our success
                 self.set_status(200, 'OK')
-                self.delete_cookie('nickname')
                 self.delete_cookie('username')
-                self.add_to_payload('message',unquote(self.username) + ' has left the chat room')
+                self.delete_cookie('nickname')
+                self.add_to_payload('message',unquote(self.nickname) + ' has left the chat room')
 
             else:
                 ## let the client know we failed because they were not found
@@ -738,6 +984,9 @@ config = {
         (r'^/api/feed/(?P<channel_id>.+)$', FeedHandler),
         (r'^/api/login/(?P<channel_id>.+)/(?P<username>.+)$', ChannelLoginHandler),
         (r'^/api/login/(?P<username>.+)$', LoginHandler),
+        (r'^/oauth/twitter$', TwitterOAuthHandler),
+        (r'^/oauth/facebook/callback', FacebookOAuthCallbackHandler),
+        (r'^/oauth/facebook/login/(?P<username>.+)$', FacebookOAuthRedirectorHandler),
     ],
     'cookie_secret': '_1sRe%%66a^O9s$4c6lq#0F%$9AlH)-6OO1!',
     'enforce_using_redis': False, # This should be true in production 

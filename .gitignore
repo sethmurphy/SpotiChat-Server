@@ -2,3 +2,4 @@
 *.swp
 the.db
 *.rdb
+config.py
