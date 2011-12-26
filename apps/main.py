@@ -23,6 +23,7 @@ import random
 import requests
 import json
 
+from config import ENVIRONMENT
 from config import TWITTER
 from config import FACEBOOK
 
@@ -413,7 +414,7 @@ def list_check_users_online(before_timestamp):
         expired_users = filter(lambda x: x.timestamp <= before_timestamp,
                        chat_channel.users_online)
         for user in expired_users:
-            msg = ChatMessage(nickname='system', username='system', message="%s can not been found in the room %s" % (user.username, chat_chanel.channel_name), channel_name = chat_channel.name);
+            msg = ChatMessage(nickname='system', username='system', message="%s can not been found in the room %s" % (user.nickname, chat_chanel.channel_name), channel_name = chat_channel.name);
 
             chat_channel.add_chat_message(msg)
             chat_channel.remove_user(user)
@@ -434,7 +435,7 @@ def redis_check_users_online(before_timestamp):
                 if data != None:
                     user = User(**json.loads(data))
 
-                    msg = ChatMessage(nickname='system', username='system', message="%s can not been found in the room" % user.username, channel_name = channel_name);
+                    msg = ChatMessage(nickname='system', username='system', message="%s can not been found in the room" % user.nickname, channel_name = channel_name);
                     
                     chat_channel = get_chat_channel(channel_name)
                     chat_channel.add_chat_message(msg)
@@ -726,8 +727,26 @@ class FacebookOAuthRedirectorHandler(ChatifyOAuthHandler):
 
         # start the login process
         url = "%s?client_id=%s&scope=%s&redirect_uri=%s&display=popup" % (FACEBOOK['REQUEST_URI'], FACEBOOK['APP_ID'], FACEBOOK['SCOPE'], FACEBOOK['REDIRECT_URI'] + "?username=" + self.username)
-        logging.debug( "facebook url %s" % url );
+        if  ENVIRONMENT.DEBUG == True:
+            # we are in development, fake it
+            logging.debug( "facebook faking it" );
+            user = find_user_by_username(self.username)
+            # we should store this data now
+            if user == None:
+                user = User(username=self.username, nickname=oauth_data['username'], oauth_id=oauth_data['id'], oauth_provider='facebook', oauth_data=json.dumps(oauth_data))
+            else:
+                user.nickname = oauth_data['username']
+                user.oauth_id = oauth_data['id']
+                user.oauth_provider = 'facebook'
+                user.oauth_data = json.dumps(oauth_data)
+            
+            # adding an existing key just replaces it
+            add_user(user)
+
+            return self.redirect("/oauth/facebook/loggedin")
+
         # send user to facebook login
+        logging.debug( "facebook url %s" % url );
         return self.redirect(url)
 
 
