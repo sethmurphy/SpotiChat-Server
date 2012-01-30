@@ -1,8 +1,52 @@
+ENVIRONMENT = {
+    "DEBUG": False,
+    "BUFFER_SIZE": 50,
+    "REDIS_PREFIX": 'sp:',
+    "POLLING_INTERVAL": 15,           ## Our long polling interval
+    "USER_TIMEOUT_INTERVAL" : 30,     ## Our users check interval
+    "USER_TIMEOUT": 60,               ## How old a user must be in seconds to kick them out of the room
+}
+
 TWITTER = {
-    'CONSUMER_KEY': '[YOURS HERE]',
-    'CONSUMER_SECRET': '[YOURS HERE]',
-    'REQUEST_TOKEN_URL': '[YOURS HERE]',
-    'AUTHORIZE_URL': '[YOURS HERE]',
-    'ACCESS_TOKEN_URL': '[YOURS HERE]',
-    'CALLBACK_URL': '[YOURS HERE]',
+    "PROVIDER_NAME": "twitter",
+    "CONSUMER_KEY": "[YOURS HERE]",
+    "CONSUMER_SECRET": "[YOURS HERE]",
+    "REQUEST_TOKEN_URL": "https://api.twitter.com/oauth/request_token",
+    "REQUEST_TOKEN_URL_HOST": "https://api.twitter.com",
+    "REQUEST_TOKEN_URL_PATH": "/oauth/request_token",
+    "AUTHORIZE_URL": "https://api.twitter.com/oauth/authorize",
+    "ACCESS_TOKEN_URL": "https://api.twitter.com/oauth/access_token",
+    "CALLBACK_URL": "http://spotichat.com/oauth/twitter/callback",
+    "USER_INFO_URL": "https://api.twitter.com/1/account/verify_credentials.json",
+    "USER_INFO_USERNAME_FIELD": "screen_name",
+    "USER_INFO_UID_FIELD": "id",
+}
+FACEBOOK = {
+    "PROVIDER_NAME": "facebook",
+    "APP_ID": "[YOURS HERE]",
+    "APP_SECRET": "[YOURS HERE]",
+    "SCOPE": "user_about_me",
+    "REDIRECT_URL": "http://spotichat.com/oauth/facebook/callback",
+    "REQUEST_URL": "https://www.facebook.com/dialog/oauth",
+    "ACCESS_TOKEN_REQUEST_URL": "https://graph.facebook.com/oauth/access_token",
+    "USER_INFO_URL": "https://graph.facebook.com/me",
+    "USER_INFO_USERNAME_FIELD": "username",
+    "USER_INFO_UID_FIELD": "id",
+    "TEST_OAUTH_DATA": { 
+        [YOURS HERE]
+    },
+}
+TUMBLR = {
+    "PROVIDER_NAME": "tumblr",
+    "CONSUMER_KEY": "[YOURS HERE]",
+    "CONSUMER_SECRET": "[YOURS HERE]",
+    "REQUEST_TOKEN_URL": "http://www.tumblr.com/oauth/request_token",
+    "REQUEST_TOKEN_URL_HOST": "http://www.tumblr.com",
+    "REQUEST_TOKEN_URL_PATH": "/oauth/request_token",
+    "AUTHORIZE_URL": "http://www.tumblr.com/oauth/authorize",
+    "ACCESS_TOKEN_URL": "http://www.tumblr.com/oauth/access_token",
+    "CALLBACK_URL": "http://spotichat.com/oauth/tumblr/callback",
+    "USER_INFO_URL": "http://www.tumblr.com/user/info",
+    "USER_INFO_USERNAME_FIELD": "screenname",
+    "USER_INFO_UID_FIELD": "uid",
 }
