@@ -41,12 +41,8 @@ config = {
         (r'^/api/feed/(?P<channel_id>.+)$', spotichat.FeedHandler),
         (r'^/api/login/(?P<channel_id>.+)/(?P<username>.+)$', spotichat.ChannelLoginHandler),
         (r'^/api/login/(?P<username>.+)$', spotichat.LoginHandler),
-        (r'^/oauth/facebook/callback', oauth.FacebookOAuthCallbackHandler),
-        (r'^/oauth/facebook/login/(?P<username>.+)$', oauth.FacebookOAuthRedirectorHandler),
-        (r'^/oauth/tumblr/callback', oauth.TumblrOAuthCallbackHandler),
-        (r'^/oauth/tumblr/login/(?P<username>.+)$', oauth.TumblrOAuthRedirectorHandler),
-        (r'^/oauth/twitter/callback', oauth.TwitterOAuthCallbackHandler),
-        (r'^/oauth/twitter/login/(?P<username>.+)$', oauth.TwitterOAuthRedirectorHandler),
+        (r'^/oauth/(?P<provider>.+)/(?P<action>.+)/(?P<username>.+)$', oauth.OAuthHandler),
+        (r'^/oauth/(?P<provider>.+)/(?P<action>.+)$', oauth.OAuthCallbackHandler),
     ],
     'cookie_secret': '_1sRe%%66a^O9s$4c6lq#0F%$9AlH)-6OO1!'
 }

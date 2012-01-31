@@ -74,7 +74,7 @@ def add_user(user):
         logging.info("added new user (%s): %s" % (affected, key))
 
     except Exception, e:
-        logging.info("error adding user %s: %s" % (user, e))
+        logging.info("ERROR adding user %s: %s" % (user, e))
 
 
 def get_chat_channel(redis_server, channel_id):
@@ -137,7 +137,7 @@ class ChatChannel(object):
                     self.chat_messages.append(message)
                     i += 1
                 except Exception, e:
-                    logging.info("error loading message %s: %s" % (msg, e))
+                    logging.info("ERROR loading message %s: %s" % (msg, e))
 
             logging.info("loaded chat_messages for %s memory buffer (%d items)" % (key, i))
 
@@ -165,7 +165,7 @@ class ChatChannel(object):
             self.redis_server.rpush(key, data)
             self.redis_server.publish(ENVIRONMENT['REDIS_PREFIX'] + 'chat_messages', data)
         except Exception, e:
-            logging.info("error adding message %s: %s" % (message, e))
+            logging.info("ERROR adding message %s: %s" % (message, e))
             raise
 
     def list_add_chat_message(self, chat_message):
@@ -205,7 +205,7 @@ class ChatChannel(object):
             affected = self.redis_server.zadd(ENVIRONMENT['REDIS_PREFIX'] + "users_timestamp",key, user.timestamp)
             logging.info("added new user timestamp(%s): %s:%s" % (affected, key, user.timestamp))
         except Exception, e:
-            logging.info("error adding user %s: %s" % (user, e))
+            logging.info("ERROR adding user %s: %s" % (user, e))
 
     ##
     ## Methods to remove a user
@@ -341,8 +341,7 @@ class User(Document):
     timestamp = fields.IntField(required=True)
     username = fields.StringField(required=True, max_length=40)
     nickname = fields.StringField(required=True, max_length=40)
-    oauth_provider = fields.StringField(max_length=40)
-    oauth_id = fields.StringField(required=True, max_length=40)
+    current_oauth_provider = fields.StringField(max_length=40)
     oauth_data = fields.StringField(required=True, max_length=2048)
 
     def __init__(self, *args, **kwargs):
