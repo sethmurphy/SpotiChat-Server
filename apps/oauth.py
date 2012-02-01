@@ -117,7 +117,7 @@ class ChatifyOAuthHandler(JSONMessageHandler):
 
     def get_user_info(handler, settings, user, oauth_token):
         """gets additional userinfo after authenticating"""
-        """uses USER_INFO fro nthe oauth config file"""
+        """uses USER_INFO from the oauth config file"""
 
         user_infos = settings['USER_INFO']
 
@@ -126,14 +126,16 @@ class ChatifyOAuthHandler(JSONMessageHandler):
             query_params = {
                 'oauth_token': oauth_token
             }
-            kvs = {}
-            if settings['OAUTH_VERSION'] == '1.0a':
-                kvs = ChatifyOAuth1aHandler._request(handler, 'GET', settings, url, query_params, user)
-
-            if settings['OAUTH_VERSION'] == '2.0':
+            oauth_version = settings['OAUTH_VERSION']
+            if oauth_version == '1.0a':
+                kvs = ChatifyOAuth1aHandler._request(handler, 'GET', settings, url, query_params, user)        
+            elif oauth_version == '2.0':
                 kvs = ChatifyOAuth2Handler._request(handler, 'GET', settings, url, query_params, user)
+            else:
+                raise Exception("get_user_info: unknow aouth version: %s " % settings['OAUTH_VERSION'])
 
             if 'response' in kvs:
+                ## some providers mave `meta` and `response` wrappers for what is returned
                 kvs = kvs['response']
 
             fields = user_info[1]
@@ -155,11 +157,14 @@ class ChatifyOAuthHandler(JSONMessageHandler):
             kv_dict = json.loads(content)
     
         else:
-            kv_dict = sd = dict(u.split('=') for u in content.split('&'))
+            kv_dict = dict(u.split('=') for u in content.split('&'))
 
         return kv_dict  
 
 
+##################################################
+# oAuth 1.0a handler (yucky)
+##################################################
 class ChatifyOAuth1aHandler(ChatifyOAuthHandler):
     """Handles oAuth 1.0a authentication"""
     """all methods are static"""
@@ -168,11 +173,15 @@ class ChatifyOAuth1aHandler(ChatifyOAuthHandler):
     def _signature_base_string(http_method, base_uri, query_params, delimiter = "%26"):
         """Creates the base string for an authorized request"""
         query_string = ''
-        for key, value in query_params:
-            if key != '':
+
+        keys = query_params.keys()
+        keys.sort()
+        
+        for param in keys:
+            if param != '':
                 if query_string != '':
                     query_string = query_string + delimiter
-                query_string = query_string + quote( quote( key, '' )  + "=" + quote( value , ''), '' )
+                query_string = query_string + quote( quote( param, '' )  + "=" + quote( query_params[param] , ''), '' )
 
         return http_method + "&" + quote(  base_uri, '' ) + "&" + query_string
 
@@ -191,9 +200,13 @@ class ChatifyOAuth1aHandler(ChatifyOAuthHandler):
         """build our Authorization header"""
         authorization_header = 'OAuth'
         
-        for key, value in query_params:
-            if key != '':
-                authorization_header = authorization_header + ' ' + key  + '="' + quote( value, '' ) + '",'
+        keys = query_params.keys()
+        keys.sort()
+        
+        for param in keys:
+            if param != '':
+                authorization_header = authorization_header + ' ' + param  + '="' + quote( query_params[param], '' ) + '",'
+
         authorization_header = authorization_header.rstrip(',')
         
         return authorization_header
@@ -219,7 +232,7 @@ class ChatifyOAuth1aHandler(ChatifyOAuthHandler):
         if user != None:
             oauth_data = json.loads(user.oauth_data )
             oauth_secret = oauth_data['oauth_token_secret']
-            params.append({ 'oauth_secret': oauth_secret })
+            params.update({ 'oauth_secret': oauth_secret })
         else:
             oauth_secret = ''
 
@@ -238,8 +251,10 @@ class ChatifyOAuth1aHandler(ChatifyOAuthHandler):
             'oauth_version': '1.0'
         }
         
-        # add optional parameters and sort
-        query_params = sorted( query_params + params)
+        # add optional parameters
+        query_params.update(params)
+
+        print query_params
 
         signature_base_string = ChatifyOAuth1aHandler._signature_base_string(http_method, url, query_params)
         signature_key = oauth_consumer_secret + "&" + oauth_secret
@@ -267,6 +282,9 @@ class ChatifyOAuth1aHandler(ChatifyOAuthHandler):
             if content.rfind('&') == -1 and content.rfind('{') == -1:
                 raise Exception(content);
 
+            if content[0:8] == '<DOCTYPE':
+                raise Exception("content")
+
             kv_pairs = handler._parse_content(content);
 
         except Exception:
@@ -287,9 +305,9 @@ class ChatifyOAuth1aHandler(ChatifyOAuthHandler):
             
             logging.debug("oauth_callback: %s" % oauth_callback);
 
-            query_params = [
-                ('oauth_callback', oauth_callback )
-            ]
+            query_params = {
+                'oauth_callback': oauth_callback
+            }
 
             kv_pairs = ChatifyOAuth1aHandler._request(handler, 'POST', settings, url, query_params, None)
     
@@ -379,6 +397,9 @@ class ChatifyOAuth1aHandler(ChatifyOAuthHandler):
     callback = ChatifyOAuthHandler.Callable(callback)
 
 
+##################################################
+# oAuth 2.0 handler
+##################################################
 class ChatifyOAuth2Handler(ChatifyOAuthHandler):
     """Handles oAuth 2.0 authentication"""
     """all methods are static"""
@@ -494,7 +515,9 @@ class ChatifyOAuth2Handler(ChatifyOAuthHandler):
     # make our redirector method "static"
     callback = ChatifyOAuthHandler.Callable(callback)
 
-
+##################################################
+# Test handler 
+##################################################
 class OAuthRedirectorTestHandler(object):
     """our development oAuth handler"""
     """parses a predifined callback from [provider].oauth.config.py"""
@@ -516,6 +539,9 @@ class OAuthRedirectorTestHandler(object):
 
         return self.redirect("/oauth/facebook/loggedin")
 
+###########################################
+# The handlers we actualy use for routing
+###########################################
 
 class OAuthHandler(ChatifyOAuthHandler):
     """oauth routing handler. All requests come through here. If not first, eventually."""
